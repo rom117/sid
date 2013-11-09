@@ -102,46 +102,51 @@ def get_data_rental(mapping, url):
 	#cp, prix
 	#<div class="header_ann" itemscope itemtype="http://schema.org/Product">
 	soup_part=soup.find("div", {"class": "header_ann"})
-	rental.extend(get_vars(mapping["cp_prix"], soup_part))
 
-	#<div class="infos_ann_light">
-	soup_first_vars=soup.find("div", {"class": "infos_ann_light"})
-	#etg, asc, ter, park
-	#<ol class="liste_details">
-	soup_part=soup_first_vars.find("ol", {"class": "liste_details"})
-	rental.extend(get_vars(mapping["first_vars"], soup_part, "get_first_vars"))
-	#maj, ref
-	#<div class="maj_ref">
-	soup_part=soup_first_vars.find("div", {"class": "maj_ref"})
-	rental.extend(get_vars(mapping["maj_ref"], soup_part))
-	#disp, gar
-	#<ol class="liste_details" id="mentions_ann">
-	soup_part=soup_first_vars.find("ol", {"id": "mentions_ann"})
-	rental.extend(get_vars(mapping["disp_gar"], soup_part, "get_first_vars"))
-	#transp, prox
-	#<dl>
-	soup_part=soup_first_vars.find("dl")
-	rental.extend(get_vars(mapping["transp_prox"], soup_part))
+	#check that the page exists
+	if soup_part!=None:
+		rental.extend(get_vars(mapping["cp_prix"], soup_part))
 
-	#surf, toil, toil_sep, sdb, meuble, chauf cuis, gard, ent calme
-	#<div class="bloc_infos_ann" id="detail"><ol class="liste_details">
-	soup_part=soup.find("div", {"id": "detail"}).find("ol", {"class": "liste_details"})
-	rental.extend(get_vars(mapping["details"], soup_part, "get_details"))
-	#piece
-	rental.extend(get_vars(mapping["piece"], soup_part))
+		#<div class="infos_ann_light">
+		soup_first_vars=soup.find("div", {"class": "infos_ann_light"})
+		#etg, asc, ter, park
+		#<ol class="liste_details">
+		soup_part=soup_first_vars.find("ol", {"class": "liste_details"})
+		rental.extend(get_vars(mapping["first_vars"], soup_part, "get_first_vars"))
+		#maj, ref
+		#<div class="maj_ref">
+		soup_part=soup_first_vars.find("div", {"class": "maj_ref"})
+		rental.extend(get_vars(mapping["maj_ref"], soup_part))
+		#disp, gar
+		#<ol class="liste_details" id="mentions_ann">
+		soup_part=soup_first_vars.find("ol", {"id": "mentions_ann"})
+		rental.extend(get_vars(mapping["disp_gar"], soup_part, "get_first_vars"))
+		#transp, prox
+		#<dl>
+		soup_part=soup_first_vars.find("dl")
+		rental.extend(get_vars(mapping["transp_prox"], soup_part))
 
-	#other independent variables
-	rental.extend(get_vars(mapping["descr_hon_tel"], soup))
+		#surf, toil, toil_sep, sdb, meuble, chauf cuis, gard, ent calme
+		#<div class="bloc_infos_ann" id="detail"><ol class="liste_details">
+		soup_part=soup.find("div", {"id": "detail"}).find("ol", {"class": "liste_details"})
+		rental.extend(get_vars(mapping["details"], soup_part, "get_details"))
+		#piece
+		rental.extend(get_vars(mapping["piece"], soup_part))
 
-	#score variables
-	#<div id="layer_notation_generale">
-	soup_score_gen = BeautifulSoup(urllib.urlopen("http://www.seloger.com/"+url[-12:-4]+"/ajax_notation_quartiers_generale_new.htm")).find("div", {"id": "layer_notation_generale"})
-	#~ #score_gen, date_last_vote
-	rental.extend(get_vars(mapping["score_gen"], soup_score_gen))
-	#score_shop, score_rest, score_rep, score_transp, score_cult, score_neigh, score_safe, score_clean, score_calm, score_price, score_green, score_traf, score_air, score_park
-	#<div class="notes_categories">
-	soup_part = soup_score_gen.find("div", {"class": "notes_categories"})
-	rental.extend(get_vars(mapping["score_vars"], soup_part, "get_score_vars"))
+		#other independent variables
+		rental.extend(get_vars(mapping["descr_hon_tel"], soup))
+
+		#score variables
+		#<div id="layer_notation_generale">
+		soup_score_gen = BeautifulSoup(urllib.urlopen("http://www.seloger.com/"+url[-12:-4]+"/ajax_notation_quartiers_generale_new.htm")).find("div", {"id": "layer_notation_generale"})
+		#~ #score_gen, date_last_vote
+		rental.extend(get_vars(mapping["score_gen"], soup_score_gen))
+		#score_shop, score_rest, score_rep, score_transp, score_cult, score_neigh, score_safe, score_clean, score_calm, score_price, score_green, score_traf, score_air, score_park
+		#<div class="notes_categories">
+		soup_part = soup_score_gen.find("div", {"class": "notes_categories"})
+		rental.extend(get_vars(mapping["score_vars"], soup_part, "get_score_vars"))
+	else:
+		print "The page "+ url +" does not exist!"
 
 	return rental
 
@@ -251,4 +256,8 @@ def main(path_file):
 
 #call main function
 path_file="data.csv"
+print "************************************************************************"
+print "The program displays the number of processed pages only."
+print "Please check the data.csv file to visualize the retrieved data."
+print "************************************************************************"
 main(path_file)
