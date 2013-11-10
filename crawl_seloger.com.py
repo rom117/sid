@@ -95,61 +95,67 @@ def get_data_rental(mapping, url):
 	rental: retrieved data from a rental page [list]
 	"""
 	rental=[]
-	soup = BeautifulSoup(urllib.urlopen(url))
-	#add the url of the page
-	rental.append(url)
+	i=0
+	while rental==[]:
+		i+=1
+		print "while: ", i
+		soup = BeautifulSoup(urllib.urlopen(url))
 
-	#cp, prix
-	#<div class="header_ann" itemscope itemtype="http://schema.org/Product">
-	soup_part=soup.find("div", {"class": "header_ann"})
+		#cp, prix
+		#<div class="header_ann" itemscope itemtype="http://schema.org/Product">
+		soup_part=soup.find("div", {"class": "header_ann"})
 
-	#check that the page exists
-	if soup_part!=None:
-		rental.extend(get_vars(mapping["cp_prix"], soup_part))
+		#check that the page exists
+		if soup_part!=None:
+			#add the url of the page
+			rental.append(url)
 
-		#<div class="infos_ann_light">
-		soup_first_vars=soup.find("div", {"class": "infos_ann_light"})
-		#etg, asc, ter, park
-		#<ol class="liste_details">
-		soup_part=soup_first_vars.find("ol", {"class": "liste_details"})
-		rental.extend(get_vars(mapping["first_vars"], soup_part, "get_first_vars"))
-		#maj, ref
-		#<div class="maj_ref">
-		soup_part=soup_first_vars.find("div", {"class": "maj_ref"})
-		rental.extend(get_vars(mapping["maj_ref"], soup_part))
-		#disp, gar
-		#<ol class="liste_details" id="mentions_ann">
-		soup_part=soup_first_vars.find("ol", {"id": "mentions_ann"})
-		rental.extend(get_vars(mapping["disp_gar"], soup_part, "get_first_vars"))
-		#transp, prox
-		#<dl>
-		soup_part=soup_first_vars.find("dl")
-		rental.extend(get_vars(mapping["transp_prox"], soup_part))
+			rental.extend(get_vars(mapping["cp_prix"], soup_part))
 
-		#surf, toil, toil_sep, sdb, meuble, chauf cuis, gard, ent calme
-		#<div class="bloc_infos_ann" id="detail"><ol class="liste_details">
-		soup_part=soup.find("div", {"id": "detail"}).find("ol", {"class": "liste_details"})
-		rental.extend(get_vars(mapping["details"], soup_part, "get_details"))
-		#piece
-		rental.extend(get_vars(mapping["piece"], soup_part))
+			#<div class="infos_ann_light">
+			soup_first_vars=soup.find("div", {"class": "infos_ann_light"})
+			#etg, asc, ter, park
+			#<ol class="liste_details">
+			soup_part=soup_first_vars.find("ol", {"class": "liste_details"})
+			rental.extend(get_vars(mapping["first_vars"], soup_part, "get_first_vars"))
+			#maj, ref
+			#<div class="maj_ref">
+			soup_part=soup_first_vars.find("div", {"class": "maj_ref"})
+			rental.extend(get_vars(mapping["maj_ref"], soup_part))
+			#disp, gar
+			#<ol class="liste_details" id="mentions_ann">
+			soup_part=soup_first_vars.find("ol", {"id": "mentions_ann"})
+			rental.extend(get_vars(mapping["disp_gar"], soup_part, "get_first_vars"))
+			#transp, prox
+			#<dl>
+			soup_part=soup_first_vars.find("dl")
+			rental.extend(get_vars(mapping["transp_prox"], soup_part))
 
-		#other independent variables
-		rental.extend(get_vars(mapping["descr_hon_tel"], soup))
+			#surf, toil, toil_sep, sdb, meuble, chauf cuis, gard, ent calme
+			#<div class="bloc_infos_ann" id="detail"><ol class="liste_details">
+			soup_part=soup.find("div", {"id": "detail"}).find("ol", {"class": "liste_details"})
+			rental.extend(get_vars(mapping["details"], soup_part, "get_details"))
+			#piece
+			rental.extend(get_vars(mapping["piece"], soup_part))
 
-		#score variables
-		#<div id="layer_notation_generale">
-		soup_score = BeautifulSoup(urllib.urlopen("http://www.seloger.com/"+url[-12:-4]+"/ajax_notation_quartiers_generale_new.htm")).find("div", {"id": "layer_notation_generale"})
-		#~ #score_gen
-		rental.extend(get_vars(mapping["score_gen"], soup_score))
-		#nb_votes, date_last_vote
-		soup_part=soup_score.find("div", {"class": "notes_recap"}).get_text()
-		rental.extend(get_vars(mapping["vote"], soup_part))
-		#score_shop, score_rest, score_rep, score_transp, score_cult, score_neigh, score_safe, score_clean, score_calm, score_price, score_green, score_traf, score_air, score_park
-		#<div class="notes_categories">
-		soup_part = soup_score.find("div", {"class": "notes_categories"})
-		rental.extend(get_vars(mapping["score_vars"], soup_part, "get_score_vars"))
-	else:
-		print "The page "+ url +" does not exist!"
+			#other independent variables
+			rental.extend(get_vars(mapping["descr_hon_tel"], soup))
+
+			#score variables
+			#<div id="layer_notation_generale">
+			soup_score = BeautifulSoup(urllib.urlopen("http://www.seloger.com/"+url[-12:-4]+"/ajax_notation_quartiers_generale_new.htm")).find("div", {"id": "layer_notation_generale"})
+			#~ #score_gen
+			rental.extend(get_vars(mapping["score_gen"], soup_score))
+			#nb_votes, date_last_vote
+			soup_part=soup_score.find("div", {"class": "notes_recap"}).get_text()
+			rental.extend(get_vars(mapping["vote"], soup_part))
+			#score_shop, score_rest, score_rep, score_transp, score_cult, score_neigh, score_safe, score_clean, score_calm, score_price, score_green, score_traf, score_air, score_park
+			#<div class="notes_categories">
+			soup_part = soup_score.find("div", {"class": "notes_categories"})
+			rental.extend(get_vars(mapping["score_vars"], soup_part, "get_score_vars"))
+		else:
+			print "soup", soup
+			print "The page "+ url +" does not exist!"
 
 	return rental
 
@@ -171,7 +177,7 @@ def get_url(url):
 	#remove parameters from url to have it work (otherwise the new design is used to render the page and the program fails!)
 	end_url = re.search("\?", url).start()
 	url="http://www.seloger.com"+url[start_url:end_url]
-	#~ print "url rental:", url
+	print "url rental:", url
 	return url
 
 
@@ -211,7 +217,6 @@ def get_save_rentals(writer):
 				writer.writerow(get_data_rental(mapping, url_rental))
 				total_nb_rentals+=1
 				print "processed pages:", total_nb_rentals
-
 
 
 def group_variables():
@@ -259,10 +264,15 @@ def main():
 	RETURN
 	None
 	"""
-	print "************************************************************************"
-	print "* The program displays the number of processed pages only.             *"
-	print "* Please check the data.csv file to visualize the retrieved data.      *"
-	print "************************************************************************"
+	print "***************************************************************************************************"
+	print "* Please check the log.txt file to visualize the log of the execution of the program.             *"
+	print "* Please check the data.csv file to visualize the retrieved data.                                 *"
+	print "***************************************************************************************************"
+	print "The program is running..."
+
+	#save all the prints in a log file
+	import sys
+	sys.stdout = open("log.txt", "w")
 
 	#delete the file if already exists
 	if os.path.exists(path_file):

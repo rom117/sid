@@ -1,0 +1,447 @@
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-9eme-75/lorette-martyrs/83350931.htm
+while:  1
+processed pages: 1
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-10eme-75/saint-vincent-de-paul-lariboisiere/83203757.htm
+while:  1
+processed pages: 2
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/ternes-maillot/82508495.htm
+while:  1
+processed pages: 3
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/chaillot/76304825.htm
+while:  1
+processed pages: 4
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/auteuil-nord/82642763.htm
+while:  1
+processed pages: 5
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-7eme-75/ecole-militaire/82867459.htm
+while:  1
+processed pages: 6
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/82798965.htm
+while:  1
+processed pages: 7
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/la-chapelle-marx-dormoy/82992599.htm
+while:  1
+processed pages: 8
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-10eme-75/louis-blanc-aqueduc/83354489.htm
+while:  1
+processed pages: 9
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/80959719.htm
+while:  1
+processed pages: 10
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-6eme-75/83075013.htm
+while:  1
+processed pages: 11
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-11eme-75/republique-saint-ambroise/82394831.htm
+while:  1
+processed pages: 12
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/83172273.htm
+while:  1
+processed pages: 13
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/courcelles-wagram/82970071.htm
+while:  1
+processed pages: 14
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/muette-sud/83172493.htm
+while:  1
+processed pages: 15
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/81181297.htm
+while:  1
+processed pages: 16
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/81193567.htm
+while:  1
+processed pages: 17
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/chaillot/82429441.htm
+while:  1
+processed pages: 18
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-12eme-75/83421169.htm
+while:  1
+processed pages: 19
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/83322705.htm
+while:  1
+processed pages: 20
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/muette-sud/79071253.htm
+while:  1
+processed pages: 21
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/auteuil-nord/82655337.htm
+while:  1
+processed pages: 22
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/muette-sud/82802705.htm
+while:  1
+processed pages: 23
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/citroen-boucicaut/83165195.htm
+while:  1
+processed pages: 24
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/chaillot/83313861.htm
+while:  1
+processed pages: 25
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/79129963.htm
+while:  1
+processed pages: 26
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-9eme-75/clichy-trinite/83002087.htm
+while:  1
+processed pages: 27
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-8eme-75/saint-philippe-du-roule/81631823.htm
+while:  1
+processed pages: 28
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-20eme-75/gambetta/83313039.htm
+while:  1
+processed pages: 29
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-20eme-75/plaine/83160561.htm
+while:  1
+processed pages: 30
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-20eme-75/gambetta/81740775.htm
+while:  1
+processed pages: 31
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/clignancourt-jules-joffrin/83057051.htm
+while:  1
+processed pages: 32
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-12eme-75/vallee-de-fecamp/80481187.htm
+while:  1
+processed pages: 33
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/82141171.htm
+while:  1
+processed pages: 34
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-14eme-75/82723703.htm
+while:  1
+processed pages: 35
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/georges-brassens/81381657.htm
+while:  1
+processed pages: 36
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-6eme-75/notre-dame-des-champs/83278993.htm
+while:  1
+processed pages: 37
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/pasteur-montparnasse/77599487.htm
+while:  1
+processed pages: 38
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/cambronne-garibaldi/83378031.htm
+while:  1
+processed pages: 39
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-19eme-75/place-des-fetes/82251291.htm
+while:  1
+processed pages: 40
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/goutte-d-or-chateau-rouge/83102303.htm
+while:  1
+processed pages: 41
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-10eme-75/saint-vincent-de-paul-lariboisiere/83384915.htm
+while:  1
+processed pages: 42
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-5eme-75/val-de-grace/82626997.htm
+while:  1
+processed pages: 43
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/83384409.htm
+while:  1
+processed pages: 44
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/courcelles-wagram/79351651.htm
+while:  1
+processed pages: 45
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-10eme-75/80546763.htm
+while:  1
+processed pages: 46
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-9eme-75/lorette-martyrs/83165561.htm
+while:  1
+processed pages: 47
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-11eme-75/republique-saint-ambroise/83389375.htm
+while:  1
+processed pages: 48
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-10eme-75/porte-saint-denis-paradis/83311715.htm
+while:  1
+processed pages: 49
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-14eme-75/pernety/83387795.htm
+while:  1
+processed pages: 50
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/la-chapelle-marx-dormoy/83096483.htm
+while:  1
+processed pages: 51
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/emeriau-zola/83387297.htm
+while:  1
+processed pages: 52
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-7eme-75/gros-caillou/83317859.htm
+while:  1
+processed pages: 53
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-20eme-75/gambetta/82643457.htm
+while:  1
+processed pages: 54
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/83342167.htm
+while:  1
+processed pages: 55
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-10eme-75/66819285.htm
+while:  1
+processed pages: 56
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/muette-sud/79939495.htm
+while:  1
+processed pages: 57
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/la-fourche-guy-moquet/83085313.htm
+while:  1
+processed pages: 58
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-13eme-75/salpetriere-austerlitz/83030003.htm
+while:  1
+processed pages: 59
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-10eme-75/chateau-d-eau-lancry/82140825.htm
+while:  1
+processed pages: 60
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/muette-nord/82934883.htm
+while:  1
+processed pages: 61
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/auteuil-nord/82144419.htm
+while:  1
+processed pages: 62
+url rental: http://www.seloger.com/annonces/locations/appartement/75-75/83376829.htm
+while:  1
+processed pages: 63
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/auteuil-sud/81912775.htm
+while:  1
+processed pages: 64
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/chaillot/83169243.htm
+while:  1
+processed pages: 65
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-12eme-75/bel-air-nord/82642807.htm
+while:  1
+processed pages: 66
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/clignancourt-jules-joffrin/82260153.htm
+while:  1
+processed pages: 67
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/82392121.htm
+while:  1
+processed pages: 68
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/83356857.htm
+while:  1
+processed pages: 69
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-8eme-75/82868925.htm
+while:  1
+processed pages: 70
+url rental: http://www.seloger.com/annonces/locations/maison/paris-8eme-75/82953663.htm
+while:  1
+processed pages: 71
+url rental: http://www.seloger.com/annonces/locations/maison/paris-8eme-75/83357297.htm
+while:  1
+processed pages: 72
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/montmartre/83278825.htm
+while:  1
+processed pages: 73
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-20eme-75/telegraphe-pelleport-saint-fargeau/83357245.htm
+while:  1
+processed pages: 74
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-14eme-75/raspail-montparnasse/81788463.htm
+while:  1
+processed pages: 75
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/emeriau-zola/83094947.htm
+while:  1
+processed pages: 76
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/vaugirard-parc-des-expositions/83149171.htm
+while:  1
+processed pages: 77
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/chaillot/81498019.htm
+while:  1
+processed pages: 78
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/81955555.htm
+while:  1
+processed pages: 79
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/82137735.htm
+while:  1
+processed pages: 80
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-7eme-75/gros-caillou/77675529.htm
+while:  1
+processed pages: 81
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/82864863.htm
+while:  1
+processed pages: 82
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-8eme-75/hoche-friedland/83159711.htm
+while:  1
+processed pages: 83
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/81678125.htm
+while:  1
+processed pages: 84
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-2eme-75/sentier-bonne-nouvelle/83171107.htm
+while:  1
+processed pages: 85
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-7eme-75/ecole-militaire/83231301.htm
+while:  1
+processed pages: 86
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/83221419.htm
+while:  1
+processed pages: 87
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/79945413.htm
+while:  1
+processed pages: 88
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/grandes-carrieres-clichy/82108749.htm
+while:  1
+processed pages: 89
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-20eme-75/telegraphe-pelleport-saint-fargeau/83387561.htm
+while:  1
+processed pages: 90
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/clichy-batignolles/83357341.htm
+while:  1
+processed pages: 91
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/chaillot/82799379.htm
+while:  1
+processed pages: 92
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-13eme-75/81824081.htm
+while:  1
+processed pages: 93
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/cambronne-garibaldi/82216247.htm
+while:  1
+processed pages: 94
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-8eme-75/saint-philippe-du-roule/82867893.htm
+while:  1
+processed pages: 95
+url rental: http://www.seloger.com/annonces/locations/maison/paris-8eme-75/saint-philippe-du-roule/83382793.htm
+while:  1
+processed pages: 96
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-6eme-75/odeon/83390227.htm
+while:  1
+processed pages: 97
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/auteuil-sud/83346783.htm
+while:  1
+processed pages: 98
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/vaugirard-parc-des-expositions/82851151.htm
+while:  1
+processed pages: 99
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/clichy-batignolles/82048377.htm
+while:  1
+processed pages: 100
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-12eme-75/82623643.htm
+while:  1
+processed pages: 101
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-20eme-75/gambetta/83347403.htm
+while:  1
+processed pages: 102
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/79146359.htm
+while:  1
+processed pages: 103
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-10eme-75/82819553.htm
+while:  1
+processed pages: 104
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-7eme-75/gros-caillou/83118415.htm
+while:  1
+processed pages: 105
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-1er-75/les-halles/82284795.htm
+while:  1
+processed pages: 106
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-12eme-75/nation-picpus/82835799.htm
+while:  1
+processed pages: 107
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-11eme-75/leon-blum-folie-regnault/83064655.htm
+while:  1
+processed pages: 108
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-13eme-75/bievres-sud-tolbiac/83074619.htm
+while:  1
+processed pages: 109
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/83089011.htm
+while:  1
+processed pages: 110
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/la-chapelle-marx-dormoy/83326553.htm
+while:  1
+processed pages: 111
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/83150101.htm
+while:  1
+processed pages: 112
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/83040153.htm
+while:  1
+processed pages: 113
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-20eme-75/telegraphe-pelleport-saint-fargeau/83318653.htm
+while:  1
+processed pages: 114
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/dupleix-motte-picquet/83166347.htm
+while:  1
+processed pages: 115
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-7eme-75/ecole-militaire/82586813.htm
+while:  1
+processed pages: 116
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/80270531.htm
+while:  1
+processed pages: 117
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/83352027.htm
+while:  1
+processed pages: 118
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/83314401.htm
+while:  1
+processed pages: 119
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/ternes-maillot/83057185.htm
+while:  1
+processed pages: 120
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/82828713.htm
+while:  1
+processed pages: 121
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-10eme-75/83380647.htm
+while:  1
+processed pages: 122
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/82648173.htm
+while:  1
+processed pages: 123
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-13eme-75/buttes-aux-cailles-glaciere/81720007.htm
+while:  1
+processed pages: 124
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/79718205.htm
+while:  1
+processed pages: 125
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/79718207.htm
+while:  1
+processed pages: 126
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/pereire-malesherbes/83343807.htm
+while:  1
+processed pages: 127
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-12eme-75/82598793.htm
+while:  1
+processed pages: 128
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-14eme-75/83339885.htm
+while:  1
+processed pages: 129
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/clichy-batignolles/82477447.htm
+while:  1
+processed pages: 130
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-13eme-75/dunois-bibliotheque-jeanne-d-arc/83166431.htm
+while:  1
+processed pages: 131
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/la-fourche-guy-moquet/83094639.htm
+while:  1
+processed pages: 132
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-10eme-75/louis-blanc-aqueduc/83205921.htm
+while:  1
+processed pages: 133
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-12eme-75/vallee-de-fecamp/82568049.htm
+while:  1
+processed pages: 134
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/la-fourche-guy-moquet/79573141.htm
+while:  1
+processed pages: 135
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/auteuil-nord/82768417.htm
+while:  1
+processed pages: 136
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/83193195.htm
+while:  1
+processed pages: 137
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-14eme-75/83029361.htm
+while:  1
+processed pages: 138
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-11eme-75/83408603.htm
+while:  1
+processed pages: 139
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/auteuil-sud/79168533.htm
+while:  1
+processed pages: 140
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/79786519.htm
+while:  1
+processed pages: 141
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/clignancourt-jules-joffrin/82423663.htm
+while:  1
+processed pages: 142
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/moskowa-porte-montmartre-porte-de-clignancourt/83228771.htm
+while:  1
+processed pages: 143
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/ternes-maillot/83357305.htm
+while:  1
+processed pages: 144
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/clignancourt-jules-joffrin/82869627.htm
+while:  1
+processed pages: 145
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/clichy-batignolles/82873003.htm
+while:  1
+processed pages: 146
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-19eme-75/manin-jaures/83206175.htm
+while:  1
+processed pages: 147
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/74394113.htm
+while:  1
+processed pages: 148
+url rental: http://www.seloger.com/annonces/locations/appartement/paris-15eme-75/dupleix-motte-picquet/80561145.htm
+while:  1
+processed pages: 149
