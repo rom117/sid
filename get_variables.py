@@ -11,7 +11,7 @@ def get_cp(soup):
 	PARAMETERS
 	soup: html content of the page [BeautifulSoup object]
 	RETURN
-	cp variable [int]
+	cp variable [integer]
 	"""
 	#<h1 itemprop="name" title="Location Studio | Paris 4ème (75004)">Location Studio<br />Paris 4ème (75004)</h1>
 	cp=soup.find("h1").get_text()
@@ -25,7 +25,7 @@ def get_prix(soup):
 	PARAMETERS
 	soup: html content of the page [BeautifulSoup object]
 	RETURN
-	prix variable [int]
+	prix variable [integer]
 	"""
 	#<b class="prix_brut">348&nbsp;&euro;&nbsp;cc<sup>*</sup> </b>
 	prix_temp=soup.find("b", {"class": "prix_brut"}).get_text()
@@ -66,7 +66,7 @@ def get_maj(soup):
 	maj variable [date]
 	"""
 	#<span class="maj" title="Date de mise à jour de l'annonce">MAJ : <b>03 / 11 / 2013</b></span>
-	return soup.find("span", {"class": "maj"}).get_text().split(":")[1].strip()
+	return soup.find("span", {"class": "maj"}).find("b").get_text().strip()
 
 
 def get_ref(soup):
@@ -89,7 +89,7 @@ def get_transp(soup):
 	PARAMETERS
 	soup: html content of the page [BeautifulSoup object]
 	RETURN
-	transp variable [int]
+	transp variable [integer]
 	"""
 	#<dt class="trans_ann">Transports&nbsp;:</dt><dd class="metro_paris" title="Métro Paris">Notre-Dame de Lorette</dd><dd class="metro_paris" title="Métro Paris">Pigalle</dd><dd class="metro_paris" title="Métro Paris">Saint-Georges</dd><dd class="rer_idf" title="RER Paris">Avenue Foch</dd>
 	transp=""
@@ -113,7 +113,7 @@ def get_prox(soup):
 	PARAMETERS
 	soup: html content of the page [BeautifulSoup object]
 	RETURN
-	prox variable [int]
+	prox variable [integer]
 	"""
 	#<dt>Proximité :</dt><dd>Métro hôtel de ville commerces</dd>
 	return soup.find("dt", text="Proximité :").findNext("dd").get_text().strip()
@@ -151,7 +151,7 @@ def get_piece(soup):
 	PARAMETERS
 	soup: html content of the page [BeautifulSoup object]
 	RETURN
-	piece variable [int]
+	piece variable [integer]
 	"""
 	#<li class="float_right" title="Pièce">Pièce <b title="1">    1 </b></li>
 	#<li class="float_right" title="Pièces">Pièces <b title="2">    2 </b></li>
@@ -216,6 +216,26 @@ def get_score_gen(soup):
 	return soup.find("div", {"class": "notes_globales"}).find("div", {"class": "star_libelle"}).get_text().strip()
 
 
+def get_nb_votes(soup):
+	"""
+	FUNCTION
+	get the number of votes of the location
+	PARAMETERS
+	soup: html content of the page [BeautifulSoup object]
+	RETURN
+	nb_votes variable [integer]
+	"""
+	#<div class="notes_recap">Au total : 15 voix (dont 15 sur la zone) - Dernier vote le 29/10/2013</div>
+	index = re.search("\d", soup).start()
+	nb=""
+	for char in soup[index:]:
+		if char.isdigit():
+			nb+=char
+		else:
+			break
+	return nb
+
+
 def get_date_last_vote(soup):
 	"""
 	FUNCTION
@@ -226,7 +246,7 @@ def get_date_last_vote(soup):
 	date_last_vote variable [date]
 	"""
 	#<div class="notes_recap">Au total : 15 voix (dont 15 sur la zone) - Dernier vote le 29/10/2013</div>
-	return soup.find("div", {"class": "notes_recap"}).get_text().strip()[-10:]
+	return soup.rstrip()[-10:]
 
 
 def get_score_vars(soup, text):
@@ -237,7 +257,7 @@ def get_score_vars(soup, text):
 	soup: html content of the page [BeautifulSoup object]
 	text: text of search [string]
 	RETURN
-	score_shop, score_rest, score_rep, score_transp, score_cult, score_neigh, score_safe, score_clean, score_calm, score_price, score_green, score_traf, score_air or score_park variable [int]
+	score_shop, score_rest, score_rep, score_transp, score_cult, score_neigh, score_safe, score_clean, score_calm, score_price, score_green, score_traf, score_air or score_park variable [integer]
 	"""
 	#~ <div>
 		#~ <span class="categorie_intitule">Commerce alimentaire</span>

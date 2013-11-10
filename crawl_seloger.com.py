@@ -74,8 +74,8 @@ def get_data_rental(mapping, url):
 	descr: description of the ad
 	hon: price of fees
 	tel: phone number of the announcer or owner
-	#TODO
 	score_gen: general score of the location
+	nb_votes: total number of votes
 	date_last_vote: date of the last vote on this rental
 	score_shop: (Commerce alimentaire)
 	score_rest: (Restaurants et bars)
@@ -138,12 +138,15 @@ def get_data_rental(mapping, url):
 
 		#score variables
 		#<div id="layer_notation_generale">
-		soup_score_gen = BeautifulSoup(urllib.urlopen("http://www.seloger.com/"+url[-12:-4]+"/ajax_notation_quartiers_generale_new.htm")).find("div", {"id": "layer_notation_generale"})
-		#~ #score_gen, date_last_vote
-		rental.extend(get_vars(mapping["score_gen"], soup_score_gen))
+		soup_score = BeautifulSoup(urllib.urlopen("http://www.seloger.com/"+url[-12:-4]+"/ajax_notation_quartiers_generale_new.htm")).find("div", {"id": "layer_notation_generale"})
+		#~ #score_gen
+		rental.extend(get_vars(mapping["score_gen"], soup_score))
+		#nb_votes, date_last_vote
+		soup_part=soup_score.find("div", {"class": "notes_recap"}).get_text()
+		rental.extend(get_vars(mapping["vote"], soup_part))
 		#score_shop, score_rest, score_rep, score_transp, score_cult, score_neigh, score_safe, score_clean, score_calm, score_price, score_green, score_traf, score_air, score_park
 		#<div class="notes_categories">
-		soup_part = soup_score_gen.find("div", {"class": "notes_categories"})
+		soup_part = soup_score.find("div", {"class": "notes_categories"})
 		rental.extend(get_vars(mapping["score_vars"], soup_part, "get_score_vars"))
 	else:
 		print "The page "+ url +" does not exist!"
@@ -151,31 +154,64 @@ def get_data_rental(mapping, url):
 	return rental
 
 
-def get_data_rentals():
+def get_url(url):
 	"""
 	FUNCTION
-	get data of all the rental ads in Paris from the website seloger.com
+	get the right url of the rental
 	PARAMETERS
-	None
+	url: url of the rental as given on the search page [string]
 	RETURN
-	data: retrieved data from all the rental pages [list of lists]
+	url: right url [string]
+	"""
+	#in case the domain name is not the same, fall back to www.seloger.com
+	#e.g.: www.bellesdemeures.com for very cozy rentals
+	#http://www.bellesdemeures.com/annonces/locations/appartement/paris-16eme-75/80716831.htm
+	#http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/80716831.htm
+	start_url = re.search("\.com", url).end()
+	#remove parameters from url to have it work (otherwise the new design is used to render the page and the program fails!)
+	end_url = re.search("\?", url).start()
+	url="http://www.seloger.com"+url[start_url:end_url]
+	#~ print "url rental:", url
+	return url
+
+
+def get_save_rentals(writer):
+	"""
+	FUNCTION
+	get data of all the rental ads in Paris from the website seloger.com and save them into a csv file
+	PARAMETERS
+	writer: csv file wrapper [File object]
+	RETURN
+	None
 	"""
 	mapping=group_variables()
-	#TODO: check domain name
-	pages=[]
 	#TEST
-	pages.append("http://www.seloger.com/annonces/locations/appartement/paris-4eme-75/82466803.htm")
-	pages.append("http://www.seloger.com/annonces/locations/appartement/paris-9eme-75/lorette-martyrs/83162365.htm")
-	pages.append("http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/78463899.htm")
-	pages.append("http://www.seloger.com/annonces/locations/appartement/paris-8eme-75/parc-monceau/82439751.htm")
-	pages.append("http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/porte-dauphine/78897937.htm")
-	pages.append("http://www.seloger.com/annonces/locations/appartement/paris-7eme-75/invalides/81937887.htm")
+	#~ ranges=[25000, 100000]
+	ranges=[0, 802, 1002, 1252, 1502, 1902, 2502, 3502, 6002, 100002]
+	total_nb_rentals=0
+	#when searching for paris and rentals, only the first 2,000 rentals are displayed (200 pages of 10 rentals each) -> the search must be done in several steps so as capture the 10,000 and more ads -> split criteria: price
+	#for each range of price
+	for index in xrange(len(ranges)-1):
+		higher=str(ranges[index+1]-1)
+		lower=str(ranges[index])
+		url_search_page="http://www.seloger.com/new_recherche,new_recherche.htm?cp=75&idtt=1&idtypebien=1,2&pxmin="+lower+"&pxmax="+higher+"&ANNONCEpg="
+		#for each range of price, look through the results of the search: 200 pages maximum
+		for page_num in xrange(1,201):
+			new_url=url_search_page+str(page_num)
+			soup = BeautifulSoup(urllib.urlopen(new_url))
+			#<a class="annone__detail__title annonce__link" href="http://www.seloger.com/annonces/locations/appartement/paris-9eme-75/lorette-martyrs/83350931.htm?refonte2013=1&cp=75&idtt=1&idtypebien=1,2&pxmax=800&pxmin=0&bd=Li_LienAnn_2"  >
+			ads=soup.find_all("a", {"class": ["annone__detail__title"]})
+			#if the a tag cannot be found, there are no more rental for this range of price
+			if len(ads)==0:
+				break
+			#always 10 rentals per page except for the last page
+			for ad_num in xrange(len(ads)):
+				url_rental=get_url(ads[ad_num]["href"])
+				#get and save the rental data in the csv file
+				writer.writerow(get_data_rental(mapping, url_rental))
+				total_nb_rentals+=1
+				print "processed pages:", total_nb_rentals
 
-	rentals=[]
-	for index in xrange(len(pages)):
-		print "page", str(index+1)
-		rentals.append(get_data_rental(mapping, pages[index]))
-	return rentals
 
 
 def group_variables():
@@ -185,7 +221,7 @@ def group_variables():
 	PARAMETERS
 	None
 	RETURN
-	mapping: dictionary mapping variables and text search [dictionary]
+	mapping: dictionary mapping variables and text to search if any [dictionary]
 	"""
 	mapping={}
 	mapping["cp_prix"]=["cp", "prix"]
@@ -196,7 +232,8 @@ def group_variables():
 	mapping["details"]=[("surf", "Surface"), ("const", "Année de construction"), ("toil", "Toilettes"), ("toil_sep", "Toilettes Séparées"), ("sdb", "Salles de bain"), ("meuble", "Meublé"), ("rang", "Rangements"), ("chauf", "Type de chauffage"), ("cuis", "Type de cuisine"), ("gard", "Gardien"), ("ent", "Entrée"), ("calme", "Calme")]
 	mapping["piece"]=["piece"]
 	mapping["descr_hon_tel"]=["descr", "hon", "tel"]
-	mapping["score_gen"]=["score_gen", "date_last_vote"]
+	mapping["score_gen"]=["score_gen"]
+	mapping["vote"]=["nb_votes", "date_last_vote"]
 	mapping["score_vars"]=[("score_shop", "Commerce alimentaire"), ("score_rest", "Restaurants et bars"), ("score_rep", "Réputation du quartier"), ("score_transp", "Transports en commun"), ("score_cult", "Culture ou sport"), ("score_neigh", "Voisins et habitants"), ("score_safe", "Sécurité"), ("score_clean", "Propreté et urbanisme"), ("score_calm", "Tranquillité de la rue"), ("score_price", "Prix des magasins"), ("score_green", "Espaces verts"), ("score_traf", "Circulation routière"), ("score_air", "Qualité de l'air"), ("score_park", "Stationnement")]
 
 	return mapping
@@ -211,53 +248,40 @@ def get_headers_rentals():
 	RETURN
 	list of variable names [list]
 	"""
-	return ["url", "cp", "prix", "etg", "asc", "ter", "park", "maj", "ref", "disp", "gar", "transp", "prox", "surf", "const", "toil", "toil_sep", "sdb", "meuble", "rang", "chauf", "cuis", "gard", "ent", "calme", "piece", "descr", "hon", "tel", "score_gen", "date_last_vote", "score_shop", "score_rest", "score_rep", "score_transp", "score_cult", "score_neigh", "score_safe", "score_clean", "score_calm", "score_price", "score_green", "score_traf", "score_air", "score_park"]
+	return ["url", "cp", "prix", "etg", "asc", "ter", "park", "maj", "ref", "disp", "gar", "transp", "prox", "surf", "const", "toil", "toil_sep", "sdb", "meuble", "rang", "chauf", "cuis", "gard", "ent", "calme", "piece", "descr", "hon", "tel", "score_gen", "nb_votes", "date_last_vote", "score_shop", "score_rest", "score_rep", "score_transp", "score_cult", "score_neigh", "score_safe", "score_clean", "score_calm", "score_price", "score_green", "score_traf", "score_air", "score_park"]
 
 
-def save_data_rentals(path_file, rentals):
-	"""
-	FUNCTION
-	save all the collected data in a csv file
-	PARAMETERS
-	path_file: path of the file that will contain the collected data
-	rentals: retrieved data from all the rental pages [list of lists]
-	RETURN
-	None
-	"""
-	#open file
-	writer=csv.writer(open(path_file, 'w'))
-
-	#write headers
-	headers=get_headers_rentals()
-	writer.writerow(headers)
-
-	#write every rental in the file
-	for rental in rentals:
-		writer.writerow(rental)
-
-
-def main(path_file):
+def main():
 	"""
 	MAIN FUNCTION
 	run the crawling of all the rental ads in Paris from the website seloger.com
+	PARAMETERS
 	RETURN
 	None
 	"""
+	print "************************************************************************"
+	print "* The program displays the number of processed pages only.             *"
+	print "* Please check the data.csv file to visualize the retrieved data.      *"
+	print "************************************************************************"
+
 	#delete the file if already exists
 	if os.path.exists(path_file):
 		os.remove(path_file)
 
-	#get data from all the rentals
-	rentals=get_data_rentals()
+	#open file
+	f=open(path_file, 'w')
+	writer=csv.writer(f)
 
-	#save it in a csv file
-	save_data_rentals(path_file, rentals)
+	#write headers
+	writer.writerow(get_headers_rentals())
+
+	#get and save data from all the rentals
+	get_save_rentals(writer)
+
+	#close the file
+	f.close()
 
 
 #call main function
 path_file="data.csv"
-print "************************************************************************"
-print "The program displays the number of processed pages only."
-print "Please check the data.csv file to visualize the retrieved data."
-print "************************************************************************"
-main(path_file)
+main()
