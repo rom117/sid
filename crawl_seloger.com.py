@@ -8,6 +8,7 @@ import csv
 import os
 #retrieve variables data
 from get_variables import *
+from time import sleep
 
 
 def get_vars(names, soup_specific, get_function=""):
@@ -95,21 +96,26 @@ def get_data_rental(mapping, url):
 	rental: retrieved data from a rental page [list]
 	"""
 	rental=[]
+	#add the url of the page
+	rental.append(url)
 	i=0
-	while rental==[]:
+	#while the page is not available, try to download it up to 5 times
+	#the page may be unavailable for two reasons: blocked because too much traffic or the ad has been removed
+	while len(rental)==1 and i<5:
 		i+=1
 		print "while: ", i
-		soup = BeautifulSoup(urllib.urlopen(url))
+		#if it is the second time or more that the page is not accessible, wait a moment before trying again
+		if i>1:
+			sleep(600)
 
-		#cp, prix
-		#<div class="header_ann" itemscope itemtype="http://schema.org/Product">
-		soup_part=soup.find("div", {"class": "header_ann"})
+		try:
+			soup = BeautifulSoup(urllib.urlopen(url))
 
-		#check that the page exists
-		if soup_part!=None:
-			#add the url of the page
-			rental.append(url)
+			#cp, prix
+			#<div class="header_ann" itemscope itemtype="http://schema.org/Product">
+			soup_part=soup.find("div", {"class": "header_ann"})
 
+			#check that the page exists
 			rental.extend(get_vars(mapping["cp_prix"], soup_part))
 
 			#<div class="infos_ann_light">
@@ -143,6 +149,7 @@ def get_data_rental(mapping, url):
 
 			#score variables
 			#<div id="layer_notation_generale">
+
 			soup_score = BeautifulSoup(urllib.urlopen("http://www.seloger.com/"+url[-12:-4]+"/ajax_notation_quartiers_generale_new.htm")).find("div", {"id": "layer_notation_generale"})
 			#~ #score_gen
 			rental.extend(get_vars(mapping["score_gen"], soup_score))
@@ -153,9 +160,14 @@ def get_data_rental(mapping, url):
 			#<div class="notes_categories">
 			soup_part = soup_score.find("div", {"class": "notes_categories"})
 			rental.extend(get_vars(mapping["score_vars"], soup_part, "get_score_vars"))
-		else:
-			print "soup", soup
-			print "The page "+ url +" does not exist!"
+
+		except Exception, e:
+			print "get_data_rental exception", e
+			print "soup:", soup
+			print "The page: "+ url +" does not exist!"
+			#in case of error, re-initialize the rental list that stores the rental data and try again
+			rental=[]
+			rental.append(url)
 
 	return rental
 
@@ -192,7 +204,7 @@ def get_save_rentals(writer):
 	"""
 	mapping=group_variables()
 	#TEST
-	#~ ranges=[25000, 100000]
+	#~ ranges=[9000, 100002]
 	ranges=[0, 802, 1002, 1252, 1502, 1902, 2502, 3502, 6002, 100002]
 	total_nb_rentals=0
 	#when searching for paris and rentals, only the first 2,000 rentals are displayed (200 pages of 10 rentals each) -> the search must be done in several steps so as capture the 10,000 and more ads -> split criteria: price
