@@ -155,11 +155,10 @@ def get_piece(soup):
 	"""
 	#<li class="float_right" title="Pièce">Pièce <b title="1">    1 </b></li>
 	#<li class="float_right" title="Pièces">Pièces <b title="2">    2 </b></li>
-	piece=""
-	try:
+	piece=soup.find("li", {"title": "Pièces"})
+	#if there is only one room
+	if piece==None:
 		piece=soup.find("li", {"title": "Pièce"})
-	except:
-		piece=soup.find("li", {"title": "Pièces"})
 	return piece.find("b").get_text().strip()
 
 

@@ -106,9 +106,11 @@ def get_data_rental(mapping, url):
 		print "while: ", i
 		#if it is the second time or more that the page is not accessible, wait a moment before trying again
 		if i>1:
-			sleep(600)
+			sleep(300)
 
 		try:
+			#TODO: check for rentals already rented (Annonce expirée : ce bien n'est malheureusement plus disponible)
+			#~ http://www.seloger.com/annonces/locations/appartement/paris-18eme-75/la-chapelle-marx-dormoy/82250985.htm
 			soup = BeautifulSoup(urllib.urlopen(url))
 
 			#cp, prix
@@ -163,7 +165,7 @@ def get_data_rental(mapping, url):
 
 		except Exception, e:
 			print "get_data_rental exception", e
-			print "soup:", soup
+			#~ print "soup:", soup
 			print "The page: "+ url +" does not exist!"
 			#in case of error, re-initialize the rental list that stores the rental data and try again
 			rental=[]
@@ -204,8 +206,8 @@ def get_save_rentals(writer):
 	"""
 	mapping=group_variables()
 	#TEST
-	#~ ranges=[9000, 100002]
-	ranges=[0, 802, 1002, 1252, 1502, 1902, 2502, 3502, 6002, 100002]
+	ranges=[1850, 1902, 2502, 3502, 6002, 100002]
+	#~ ranges=[0, 802, 1002, 1252, 1502, 1902, 2502, 3502, 6002, 100002]
 	total_nb_rentals=0
 	#when searching for paris and rentals, only the first 2,000 rentals are displayed (200 pages of 10 rentals each) -> the search must be done in several steps so as capture the 10,000 and more ads -> split criteria: price
 	#for each range of price
@@ -307,3 +309,4 @@ def main():
 #call main function
 path_file="data.csv"
 main()
+#~ get_data_rental(group_variables(), "http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/la-fourche-guy-moquet/81161807.htm")
