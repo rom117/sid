@@ -30,7 +30,7 @@ def get_vars(names, soup_specific, get_function=""):
 			else:
 				value=eval(get_function)(soup_specific, name[1])
 		except Exception, e:
-			#~ print "get_specific_vars exception", e
+			#~ print "get_specific_vars exception", e, names
 			value=""
 		rental.append(value.encode('utf-8'))
 	return rental
@@ -68,6 +68,7 @@ def get_data_rental(mapping, url):
 	asc: is there a lift?
 	chauf: type of heating system
 	cuis: type of kitchen
+	code: is there a door code?
 	gard: is there a watchman?
 	ent: is there an individual entrance
 	calme: is it quiet?
@@ -92,6 +93,10 @@ def get_data_rental(mapping, url):
 	score_traf: (Circulation routière)
 	score_air: (Qualité de l'air)
 	score_park: (Stationnement)
+	price_var_date: date of variation of the price [date]
+	price_var_eve: increase or decrease of the price [string]
+	price_var_price: new price [int]
+	price_var_src: agency that sells the good [string]
 	RETURN
 	rental: retrieved data from a rental page [list]
 	"""
@@ -99,9 +104,9 @@ def get_data_rental(mapping, url):
 	#add the url of the page
 	rental.append(url)
 	i=0
-	#while the page is not available, try to download it up to 5 times
+	#while the page is not available, try to download it up to 3 times
 	#the page may be unavailable for two reasons: blocked because too much traffic or the ad has been removed
-	while len(rental)==1 and i<5:
+	while len(rental)==1 and i<3:
 		i+=1
 		print "while: ", i
 		#if it is the second time or more that the page is not accessible, wait a moment before trying again
@@ -163,6 +168,16 @@ def get_data_rental(mapping, url):
 			soup_part = soup_score.find("div", {"class": "notes_categories"})
 			rental.extend(get_vars(mapping["score_vars"], soup_part, "get_score_vars"))
 
+			#price variation variables
+			#<div id="evolprix" class="bloc_infos_ann">...<table cellpadding="0" cellspacing="0" border="0">...<tr>...
+			if search_type=="purchase":
+				try:
+					soup_part=soup.find("div", {"id": "evolprix"}).find("table").find_all("tr")[1:]
+					rental.extend(get_vars(mapping["price_var"], soup_part, "get_price_var_vars"))
+				except Exception, e:
+					pass
+					#~ print "no price variation", e
+
 		except Exception, e:
 			print "get_data_rental exception", e
 			#~ print "soup:", soup
@@ -205,32 +220,50 @@ def get_save_rentals(writer):
 	None
 	"""
 	mapping=group_variables()
-	#TEST
-	ranges=[1850, 1902, 2502, 3502, 6002, 100002]
-	#~ ranges=[0, 802, 1002, 1252, 1502, 1902, 2502, 3502, 6002, 100002]
+	#rental
+	if search_type=="rental":
+		#TEST
+		#~ ranges=[0, 390]
+		ranges=[0, 802, 1002, 1252, 1502, 1902, 2502, 3502, 6002, 100002]
+	#purchase
+	else:
+		#TEST
+		#~ ranges=[0, 40000]
+		ranges=[0, 180002, 240002, 280002, 320002, 360002, 400002, 450002, 490002, 540002, 600002, 670002, 750002, 840002, 960002, 1140002, 1380002, 1780002, 2500002, 100000000]
+
 	total_nb_rentals=0
 	#when searching for paris and rentals, only the first 2,000 rentals are displayed (200 pages of 10 rentals each) -> the search must be done in several steps so as capture the 10,000 and more ads -> split criteria: price
 	#for each range of price
 	for index in xrange(len(ranges)-1):
 		higher=str(ranges[index+1]-1)
 		lower=str(ranges[index])
-		url_search_page="http://www.seloger.com/new_recherche,new_recherche.htm?cp=75&idtt=1&idtypebien=1,2&pxmin="+lower+"&pxmax="+higher+"&ANNONCEpg="
+		if search_type=="rental":
+			url_search_page="http://www.seloger.com/new_recherche,new_recherche.htm?cp=75&idtt=1&idtypebien=1,2&pxmin="+lower+"&pxmax="+higher+"&ANNONCEpg="
+		else:
+			url_search_page="http://www.seloger.com/recherche.htm?cp=75&idtt=2&idtypebien=1,2&org=engine&pxmin="+lower+"&pxmax="+higher+"&BCLANNpg="
+
 		#for each range of price, look through the results of the search: 200 pages maximum
 		for page_num in xrange(1,201):
 			new_url=url_search_page+str(page_num)
 			soup = BeautifulSoup(urllib.urlopen(new_url))
 			#<a class="annone__detail__title annonce__link" href="http://www.seloger.com/annonces/locations/appartement/paris-9eme-75/lorette-martyrs/83350931.htm?refonte2013=1&cp=75&idtt=1&idtypebien=1,2&pxmax=800&pxmin=0&bd=Li_LienAnn_2"  >
-			ads=soup.find_all("a", {"class": ["annone__detail__title"]})
+			if search_type=="rental":
+				ads=soup.find_all("a", {"class": ["annone__detail__title"]})
+			else:
+				ads=soup.find_all("span", {"class": ["mea1"]})
+				#~ print "ads", ads
+				ads=[ad.find("a") for ad in ads]
 			#if the a tag cannot be found, there are no more rental for this range of price
 			if len(ads)==0:
 				break
 			#always 10 rentals per page except for the last page
 			for ad_num in xrange(len(ads)):
-				url_rental=get_url(ads[ad_num]["href"])
-				#get and save the rental data in the csv file
-				writer.writerow(get_data_rental(mapping, url_rental))
-				total_nb_rentals+=1
-				print "processed pages:", total_nb_rentals
+				if "selogerneuf" not in ads[ad_num]["href"]:
+					url_rental=get_url(ads[ad_num]["href"])
+					#get and save the rental data in the csv file
+					writer.writerow(get_data_rental(mapping, url_rental))
+					total_nb_rentals+=1
+					print "processed pages:", total_nb_rentals
 
 
 def group_variables():
@@ -248,12 +281,13 @@ def group_variables():
 	mapping["maj_ref"]=["maj", "ref"]
 	mapping["disp_gar"]=[("disp", "Disponible"), ("gar", "Garantie")]
 	mapping["transp_prox"]=["transp", "prox"]
-	mapping["details"]=[("surf", "Surface"), ("const", "Année de construction"), ("toil", "Toilettes"), ("toil_sep", "Toilettes Séparées"), ("sdb", "Salles de bain"), ("meuble", "Meublé"), ("rang", "Rangements"), ("chauf", "Type de chauffage"), ("cuis", "Type de cuisine"), ("gard", "Gardien"), ("ent", "Entrée"), ("calme", "Calme")]
+	mapping["details"]=[("surf", "Surface"), ("const", "Année de construction"), ("toil", "Toilettes"), ("toil_sep", "Toilettes Séparées"), ("sdb", "Salles de bain"), ("meuble", "Meublé"), ("rang", "Rangements"), ("chauf", "Type de chauffage"), ("cuis", "Type de cuisine"), ("code", "Digicode"), ("gard", "Gardien"), ("ent", "Entrée"), ("calme", "Calme")]
 	mapping["piece"]=["piece"]
 	mapping["descr_hon_tel"]=["descr", "hon", "tel"]
 	mapping["score_gen"]=["score_gen"]
 	mapping["vote"]=["nb_votes", "date_last_vote"]
 	mapping["score_vars"]=[("score_shop", "Commerce alimentaire"), ("score_rest", "Restaurants et bars"), ("score_rep", "Réputation du quartier"), ("score_transp", "Transports en commun"), ("score_cult", "Culture ou sport"), ("score_neigh", "Voisins et habitants"), ("score_safe", "Sécurité"), ("score_clean", "Propreté et urbanisme"), ("score_calm", "Tranquillité de la rue"), ("score_price", "Prix des magasins"), ("score_green", "Espaces verts"), ("score_traf", "Circulation routière"), ("score_air", "Qualité de l'air"), ("score_park", "Stationnement")]
+	mapping["price_var"]=[("price_var_date", 0), ("price_var_eve", 1), ("price_var_price", 2), ("price_var_src", 3)]
 
 	return mapping
 
@@ -267,26 +301,33 @@ def get_headers_rentals():
 	RETURN
 	list of variable names [list]
 	"""
-	return ["url", "cp", "prix", "etg", "asc", "ter", "park", "maj", "ref", "disp", "gar", "transp", "prox", "surf", "const", "toil", "toil_sep", "sdb", "meuble", "rang", "chauf", "cuis", "gard", "ent", "calme", "piece", "descr", "hon", "tel", "score_gen", "nb_votes", "date_last_vote", "score_shop", "score_rest", "score_rep", "score_transp", "score_cult", "score_neigh", "score_safe", "score_clean", "score_calm", "score_price", "score_green", "score_traf", "score_air", "score_park"]
+	headers= ["url", "cp", "prix", "etg", "asc", "ter", "park", "maj", "ref", "disp", "gar", "transp", "prox", "surf", "const", "toil", "toil_sep", "sdb", "meuble", "rang", "chauf", "cuis", "code", "gard", "ent", "calme", "piece", "descr", "hon", "tel", "score_gen", "nb_votes", "date_last_vote", "score_shop", "score_rest", "score_rep", "score_transp", "score_cult", "score_neigh", "score_safe", "score_clean", "score_calm", "score_price", "score_green", "score_traf", "score_air", "score_park"]
+	if search_type=="purchase":
+		headers.extend(["price_var_date", "price_var_eve", "price_var_price", "price_var_src"])
+	return headers
 
 
-def main():
+def main(search_type):
 	"""
 	MAIN FUNCTION
-	run the crawling of all the rental ads in Paris from the website seloger.com
+	run the crawling of all the rental or purchase ads in Paris from the website seloger.com
 	PARAMETERS
+	search_type: "rental" or "purchase" [string]
 	RETURN
 	None
 	"""
-	print "***************************************************************************************************"
-	print "* Please check the log.txt file to visualize the log of the execution of the program.             *"
-	print "* Please check the data.csv file to visualize the retrieved data.                                 *"
-	print "***************************************************************************************************"
+	print "****************************************************************************************************"
+	print "* Please check the log_"+search_type+".txt file to visualize the log of the execution of the program.     *"
+	print "* Please check the data_"+search_type+".csv file to visualize the retrieved data.                         *"
+	print "****************************************************************************************************"
 	print "The program is running..."
+
+	#path of the file storing all the data
+	path_file="data_"+search_type+".csv"
 
 	#save all the prints in a log file
 	import sys
-	sys.stdout = open("log.txt", "w")
+	sys.stdout = open("log_"+search_type+".txt", "w")
 
 	#delete the file if already exists
 	if os.path.exists(path_file):
@@ -306,7 +347,18 @@ def main():
 	f.close()
 
 
-#call main function
-path_file="data.csv"
-main()
-#~ get_data_rental(group_variables(), "http://www.seloger.com/annonces/locations/appartement/paris-17eme-75/la-fourche-guy-moquet/81161807.htm")
+
+#***********************************************************************
+# PARAMETERS THAT CAN BE CHANGED
+# search_type: "rental" or "purchase"
+#~ search_type="rental"
+search_type="purchase"
+#***********************************************************************
+
+#run the program
+main(search_type)
+
+#TEST
+#~ mapping=group_variables()
+#~ url="http://www.seloger.com/annonces/achat/appartement/paris-20eme-75/telegraphe-pelleport-saint-fargeau/82538295.htm"
+#~ get_data_rental(mapping, url)

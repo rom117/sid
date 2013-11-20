@@ -122,12 +122,12 @@ def get_prox(soup):
 def get_details(soup, text):
 	"""
 	FUNCTION
-	get the surface (surf), year of construction (const), number of WCs (toil), toil_sep data (toil_sep), number of bathrooms (sdb), furniture data (meuble), storage data (rang), type of heater system (chauf), type of kitchen (cuis), watchman data (gard), entrance data (ent) or quietness data (calme)
+	get the surface (surf), year of construction (const), number of WCs (toil), toil_sep data (toil_sep), number of bathrooms (sdb), furniture data (meuble), storage data (rang), type of heater system (chauf), type of kitchen (cuis), door code data (code), watchman data (gard), entrance data (ent) or quietness data (calme)
 	PARAMETERS
 	soup: html content of the page [BeautifulSoup object]
 	text: text of search [string]
 	RETURN
-	surf, const, toil, toil_sep, sdb, meuble, rang, chauf, cuis, gard, ent or calme variable [string or int]
+	surf, const, toil, toil_sep, sdb, meuble, rang, chauf, cuis, code, gard, ent or calme variable [string or int]
 	"""
 	#<li class="float_right switch_style" title="Surface">Surface <b title="10 m²">    10 m² </b></li>
 	#<li class="float_right switch_style" title="Année de construction">Année de construction <b title="1900">    1900 </b></li>
@@ -138,6 +138,7 @@ def get_details(soup, text):
 	#<li class="float_right switch_style" title="Rangements">Rangements <b title="">oui </b></li>
 	#<li class="float_right" title="Type de chauffage">Type de chauffage <b title="central">    central </b></li>
 	#<li class="float_right switch_style" title="Type de cuisine">Type de cuisine <b title="coin cuisine">    coin... </b></li>
+	#<li class="float_right switch_style" title="Digicode">Digicode <b title="">oui </b></li>
 	#<li class="switch_style" title="Gardien">Gardien <b title="">oui </b></li>
 	#<li class="float_right switch_style" title="Entrée">Entrée <b title="">oui </b></li>
 	#<li class="float_right switch_style" title="Calme">Calme <b title="">oui </b></li>
@@ -270,3 +271,19 @@ def get_score_vars(soup, text):
 	#~ </div>
 	score=soup.find("span", {"class": "categorie_intitule"}, text=text).find_parent("div").find_all("div", {"class": "note_box_value"})
 	return str(len(score))
+
+
+def get_price_var_vars(soup, index):
+	"""
+	FUNCTION
+	get the date of variation of the price (price_var_date), increase or decrease of the price (price_var_eve), new price (price_var_price), agency that sells the good (price_var_src)
+	PARAMETERS
+	soup: html content of the page [BeautifulSoup object]
+	index: position of the text to retrieve [int]
+	RETURN
+	price_var_date, price_var_eve, price_var_price, price_var_src [date, string, integer]
+	"""
+	price_var_var=""
+	for field in soup:
+		price_var_var+=field.find_all("td")[index].get_text().strip()+";"
+	return price_var_var[:-1]
