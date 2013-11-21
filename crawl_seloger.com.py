@@ -202,9 +202,14 @@ def get_url(url):
 	#e.g.: www.bellesdemeures.com for very cozy rentals
 	#http://www.bellesdemeures.com/annonces/locations/appartement/paris-16eme-75/80716831.htm
 	#http://www.seloger.com/annonces/locations/appartement/paris-16eme-75/80716831.htm
+	print "future url:", url
 	start_url = re.search("\.com", url).end()
 	#remove parameters from url to have it work (otherwise the new design is used to render the page and the program fails!)
-	end_url = re.search("\?", url).start()
+	try:
+		end_url = re.search("\?", url).start()
+	except:
+		#if no parameter take the url until the end
+		end_url=len(url)
 	url="http://www.seloger.com"+url[start_url:end_url]
 	print "url rental:", url
 	return url
@@ -228,7 +233,7 @@ def get_save_rentals(writer):
 	#purchase
 	else:
 		#TEST
-		#~ ranges=[0, 40000]
+		#~ ranges=[0, 30000]
 		ranges=[0, 180002, 240002, 280002, 320002, 360002, 400002, 450002, 490002, 540002, 600002, 670002, 750002, 840002, 960002, 1140002, 1380002, 1780002, 2500002, 100000000]
 
 	total_nb_rentals=0
@@ -245,6 +250,7 @@ def get_save_rentals(writer):
 		#for each range of price, look through the results of the search: 200 pages maximum
 		for page_num in xrange(1,201):
 			new_url=url_search_page+str(page_num)
+			print "search page:", new_url
 			soup = BeautifulSoup(urllib.urlopen(new_url))
 			#<a class="annone__detail__title annonce__link" href="http://www.seloger.com/annonces/locations/appartement/paris-9eme-75/lorette-martyrs/83350931.htm?refonte2013=1&cp=75&idtt=1&idtypebien=1,2&pxmax=800&pxmin=0&bd=Li_LienAnn_2"  >
 			if search_type=="rental":
